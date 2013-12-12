@@ -1,10 +1,13 @@
 module USPS::Request
   class DeliveryConfirmation < Base
     config(
-      :api => 'DeliveryConfirmationV3',
-      :tag => 'DeliveryConfirmationV3.0Request',
+      :api => 'DeliveryConfirmationV4',
+      :tag => 'DeliveryConfirmationV4.0Request',
+      :api_certify => 'DelivConfirmCertifyV4',
+      :tag_certify => 'DelivConfirmCertifyV4.0Request',
       :secure => true,
-      :response => USPS::Response::DeliveryConfirmation
+      :response => USPS::Response::DeliveryConfirmation,
+      :require_password=> true
     )
 
     attr_reader :to, :from, :weight, :options, :format

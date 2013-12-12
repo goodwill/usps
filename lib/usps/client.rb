@@ -12,9 +12,9 @@ module USPS
         :params => {
           "API" => request.api,
           "XML" => request.build
-        }
+        }, :ssl_verifypeer=>false, :ssl_verifyhost=>2, :verbose=>USPS.config.verbose?
       })
-
+      
       # Parse the request
       xml = Nokogiri::XML.parse(response.body)
 
@@ -44,8 +44,6 @@ module USPS
       case
       when request.secure?
         "https://secure.shippingapis.com/#{dll}"
-      when testing?
-        "http://testing.shippingapis.com/#{dll}"
       else
         "http://production.shippingapis.com/#{dll}"
       end
